@@ -10,10 +10,12 @@ function hdlLoad() {
     var hitboxLocation = [{ x: 712, y: 812 }, { x: -100, y: -100 }, { x: 700, y: 360 }, { x: -100, y: -100 }, { x: 64, y: 364 }];
     var nextVideo = false;
     var doOneThanSkip = false;
-    playbtn.addEventListener("click", startVideo);
+    var scaleFactor = 8;
+    playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden"; });
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
-    canvas.width = screen.width - (screen.width * 0.2);
-    canvas.height = screen.height - (screen.height * 0.2);
+    canvas.width = screen.width;
+    canvas.height = screen.height;
+    canvas.style.width = canvas.width * (scaleFactor / 10) + "px";
     function action(vector) {
         console.log(vector);
         console.log(hitbox);
@@ -62,8 +64,8 @@ function hdlLoad() {
     });
     function getCursorPosition(canvas, event) {
         var rect = canvas.getBoundingClientRect();
-        var x = event.clientX - rect.left;
-        var y = event.clientY - rect.top;
+        var x = (event.clientX - rect.left) * (10 / scaleFactor);
+        var y = (event.clientY - rect.top) * (10 / scaleFactor);
         return [x, y];
     }
 }

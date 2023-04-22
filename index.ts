@@ -15,13 +15,15 @@ interface Vector {
 let hitboxLocation: Vector[] = [{x: 712, y: 812}, {x: -100, y: -100}, {x: 700, y: 360}, {x: -100, y: -100}, {x: 64, y: 364}];
 let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
+let scaleFactor: number = 8;
 
 
-playbtn.addEventListener("click", startVideo);
+playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden";});
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
 
-canvas.width = screen.width-(screen.width*0.2);
-canvas.height = screen.height-(screen.height*0.2);
+canvas.width = screen.width;
+canvas.height = screen.height;
+canvas.style.width = canvas.width*(scaleFactor/10) + "px";
 
 function action(vector: number[]): void {
     console.log(vector);
@@ -74,8 +76,8 @@ video.addEventListener("play", function (): void {
 
 function getCursorPosition(canvas: HTMLCanvasElement, event: MouseEvent): number[] {
     const rect: ClientRect = canvas.getBoundingClientRect();
-    let x: number = event.clientX - rect.left;
-    let y: number = event.clientY - rect.top;
+    let x: number = (event.clientX - rect.left)*(10/scaleFactor);
+    let y: number = (event.clientY - rect.top)*(10/scaleFactor);
     return[x, y];
 }
 
