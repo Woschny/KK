@@ -7,15 +7,16 @@ const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
 let videoInt: number = 0;
 let video: HTMLVideoElement  = <HTMLVideoElement>document.getElementById("video");
 let sourceString: string[] = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4"];
-let hitbox: number[] = [660, 780, 100, 100];
+let hitboxLocation: Vector[] = [{x: 660, y: 780, s: 100}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}];
+//  1-90, 90-270, 272-362, 362-460, 560-550,
+//   cy     cy      ev       ev        ev
+let hitbox: number[] = [hitboxLocation[0].x, hitboxLocation[0].y, hitboxLocation[0].s, hitboxLocation[0].s];
 interface Vector {
     x: number;
     y: number;
     s: number;
 }
-let hitboxLocation: Vector[] = [{x: 660, y: 780, s: 100}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}, {x: -100, y: -100, s: 100}, {x: 64, y: 364, s: 100}];
-//  1-90, 90-270, 272-362, 362-460, 
-//   cy     cy      ev       ev     
+
 let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
 let scaleFactor: number = 8;
