@@ -3,6 +3,7 @@ function hdlLoad() {
     localStorage.clear();
     var canvas = document.getElementById("canvas");
     var playbtn = document.getElementById("play");
+    var debugbtn = document.getElementById("debug");
     var ctx = canvas.getContext("2d");
     var videoInt = 0;
     var video = document.getElementById("video");
@@ -14,7 +15,9 @@ function hdlLoad() {
     var nextVideo = false;
     var doOneThanSkip = false;
     var scaleFactor = 8;
+    var debugMode = false;
     playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden"; });
+    debugbtn.addEventListener("click", toggleDebugMode);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
     canvas.width = screen.width;
@@ -26,6 +29,14 @@ function hdlLoad() {
         if (nextVideo == false && vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]) {
             console.log("hit");
             nextVideo = true;
+        }
+    }
+    function toggleDebugMode() {
+        if (debugMode == true) {
+            debugMode = false;
+        }
+        else if (debugMode == false) {
+            debugMode = true;
         }
     }
     function hoverVis(vector) {
@@ -47,8 +58,10 @@ function hdlLoad() {
         (function loop() {
             if (!$this.paused && !$this.ended) {
                 ctx.drawImage($this, 0, 0);
-                ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
-                ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
+                if (debugMode == true) {
+                    ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
+                    ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
+                }
                 setTimeout(loop, 1000 / 30); // drawing at 30fps
             }
             else {
