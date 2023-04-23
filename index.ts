@@ -14,6 +14,8 @@ interface Vector {
     s: number;
 }
 let hitboxLocation: Vector[] = [{x: 660, y: 780, s: 100}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}, {x: -100, y: -100, s: 100}, {x: 64, y: 364, s: 100}];
+//  1-90, 90-270, 272-362, 362-460, 
+//   cy     cy      ev       ev     
 let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
 let scaleFactor: number = 8;
