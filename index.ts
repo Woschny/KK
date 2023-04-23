@@ -7,12 +7,13 @@ const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
 let videoInt: number = 0;
 let video: HTMLVideoElement  = <HTMLVideoElement>document.getElementById("video");
 let sourceString: string[] = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4"];
-let hitbox: number[] = [712, 812, 100, 100];
+let hitbox: number[] = [660, 780, 100, 100];
 interface Vector {
     x: number;
     y: number;
+    s: number;
 }
-let hitboxLocation: Vector[] = [{x: 712, y: 812}, {x: -100, y: -100}, {x: 700, y: 360}, {x: -100, y: -100}, {x: 64, y: 364}];
+let hitboxLocation: Vector[] = [{x: 660, y: 780, s: 100}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}, {x: -100, y: -100, s: 100}, {x: 64, y: 364, s: 100}];
 let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
 let scaleFactor: number = 8;
@@ -20,6 +21,7 @@ let scaleFactor: number = 8;
 
 playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden";});
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
+canvas.addEventListener("mousemove", (e) => hoverVis(getCursorPosition(canvas, e)))
 
 canvas.width = screen.width;
 canvas.height = screen.height;
@@ -31,6 +33,15 @@ function action(vector: number[]): void {
     if (nextVideo == false && vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]){
         console.log("hit");
         nextVideo = true;
+    }
+}
+
+function hoverVis(vector: number[]): void {
+    if (nextVideo == false && vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]){
+    canvas.style.cursor = "pointer";
+    }
+    else {
+    canvas.style.cursor = "default";
     }
 }
 
@@ -57,6 +68,8 @@ video.addEventListener("play", function (): void {
                 video.src = "./Assets/" + sourceString[videoInt];
                 hitbox[0] = hitboxLocation[videoInt].x;
                 hitbox[1] = hitboxLocation[videoInt].y;
+                hitbox[2] = hitboxLocation[videoInt].s;
+                hitbox[3] = hitbox[2];
                 doOneThanSkip = false;
                 }
             startVideo();
@@ -68,6 +81,8 @@ video.addEventListener("play", function (): void {
     video.src = "./Assets/" + sourceString[videoInt];
     hitbox[0] = hitboxLocation[videoInt].x;
     hitbox[1] = hitboxLocation[videoInt].y;
+    hitbox[2] = hitboxLocation[videoInt].s;
+    hitbox[3] = hitbox[2];
     startVideo();
     nextVideo = false;
     doOneThanSkip = true;
