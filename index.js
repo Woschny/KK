@@ -1,5 +1,6 @@
 window.addEventListener("load", hdlLoad);
 function hdlLoad() {
+    localStorage.clear();
     var canvas = document.getElementById("canvas");
     var playbtn = document.getElementById("play");
     var ctx = canvas.getContext("2d");

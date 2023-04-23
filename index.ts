@@ -1,6 +1,6 @@
 window.addEventListener("load", hdlLoad);
 function hdlLoad(): void {
-
+localStorage.clear();
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas");
 const playbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("play");
 const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
