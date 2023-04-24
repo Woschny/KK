@@ -2,20 +2,41 @@ body{
     background-color: #262626;
     overflow: hidden;
 }
+
 canvas{
-    background-color: #202020;
+    background-color: #101010;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     ;
 }
+
+button{
+    position: absolute;
+}
+
 video{
     visibility: hidden;
+    position: absolute;
 }
 #play{
+    position: absolute;
+    top: 71.5%;
+    left: 67.6%;
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+    padding: 1%;
+    opacity: 0;
+}
+#play:hover{
+    cursor: pointer;
+}
+
+.Monitor{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
