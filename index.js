@@ -21,8 +21,8 @@ function hdlLoad() {
     debugbtn.addEventListener("click", toggleDebugMode);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
-    canvas.width = screen.width;
-    canvas.height = canvas.width / 1.77777777777777777777776;
+    canvas.width = 1920;
+    canvas.height = 1080;
     canvas.style.width = canvas.width * (scaleFactor / 10) + "px";
     function action(vector) {
         console.log(vector);
