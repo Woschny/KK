@@ -8,10 +8,10 @@ function hdlLoad() {
     var ctx = canvas.getContext("2d");
     var videoInt = 0;
     var video = document.getElementById("video");
-    var sourceString = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4"];
-    var hitboxLocation = [{ x: 660, y: 780, s: 100 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 }, { x: -100, y: -100, s: 100 }];
-    //  1-90, 90-270, 272-362, 362-460, 560-550,
-    //   cy     cy      ev       ev        ev
+    var sourceString = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4", "T7.mp4"];
+    var hitboxLocation = [{ x: 660, y: 780, s: 100 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 830, y: 40, s: 800 }];
+    //  1-90, 90-270, 272-362, 362-460, 560-550, 550-1100, 1100-1190,
+    //   cy     cy      ev       ev        ev       ev         ev
     var hitbox = [hitboxLocation[0].x, hitboxLocation[0].y, hitboxLocation[0].s, hitboxLocation[0].s];
     var nextVideo = false;
     var doOneThanSkip = false;
@@ -22,7 +22,7 @@ function hdlLoad() {
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
     canvas.width = screen.width;
-    canvas.height = screen.height;
+    canvas.height = canvas.width / 1.77777777777777777777776;
     canvas.style.width = canvas.width * (scaleFactor / 10) + "px";
     function action(vector) {
         console.log(vector);
