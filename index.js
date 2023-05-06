@@ -9,12 +9,14 @@ function hdlLoad() {
     var ctx = canvas.getContext("2d");
     var videoInt = 0;
     var video = document.getElementById("video");
-    var sourceString = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4", "T7.mp4", "T8.mp4", "T9.mp4", "T10.mp4", "T11.mp4", "T12.mp4", "T13.mp4", "T14.mp4", "T15.mp4"];
+    var sourceString = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4", "T7.mp4", "T8.mp4", "T9.mp4", "T10.mp4", "T11.mp4", "T12.mp4",
+        "T13.mp4", "T14.mp4", "T15.mp4", "T16.mp4", "T17.mp4"];
     var hitboxLocation = [{ x: 660, y: 780, s: 100 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 },
         { x: -100, y: -100, s: 100 }, { x: 830, y: 40, s: 800 }, { x: -100, y: -100, s: 100 }, { x: 1080, y: 630, s: 260 }, { x: -100, y: -100, s: 100 },
-        { x: 0, y: 0, s: 2000 }, { x: -100, y: -100, s: 100 }, { x: 520, y: 530, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 1110, y: 550, s: 150 }];
-    //  1-90, 90-270, 272-362, 362-460, 460-550, 550-1100, 1100-1190, 1190-2000, 2000-2090, 2090-2300, 2300-2390, 2390-3000, 3000-3090, 3090-3650, 3650-3740, 
-    //   bt1cy  bt2cy    bt3ev   bt4ev    t5ev     t6ev       bt7ev      bt8ev     bt9ev      bt10ev     bt11ev     bt12ev     bt13ev     bt14ev    bt15ev
+        { x: 0, y: 0, s: 2000 }, { x: -100, y: -100, s: 100 }, { x: 520, y: 530, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 1110, y: 550, s: 150 },
+        { x: -100, y: -100, s: 100 }, { x: 630, y: 160, s: 1000 }];
+    //  1-90, 90-270, 272-362, 362-460, 460-550, 550-1100, 1100-1190, 1190-2000, 2000-2090, 2090-2300, 2300-2390, 2390-3000, 3000-3090, 3090-3650, 3650-3740, 3740-4200, 4200-4290, 
+    //   bt1cy  bt2cy    bt3ev   bt4ev    t5ev     t6ev       bt7ev      bt8ev     bt9ev      bt10ev     bt11ev     bt12ev     bt13ev     bt14ev    bt15ev     bt16ev      bt17ev
     var hitbox = [hitboxLocation[0].x, hitboxLocation[0].y, hitboxLocation[0].s, hitboxLocation[0].s];
     var nextVideo = false;
     var doOneThanSkip = false;
