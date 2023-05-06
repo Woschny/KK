@@ -14,7 +14,7 @@ function hdlLoad() {
         { x: -100, y: -100, s: 100 }, { x: 830, y: 40, s: 800 }, { x: -100, y: -100, s: 100 }, { x: 1080, y: 630, s: 260 }, { x: -100, y: -100, s: 100 },
         { x: 0, y: 0, s: 2000 }, { x: -100, y: -100, s: 100 }, { x: 520, y: 530, s: 200 }];
     //  1-90, 90-270, 272-362, 362-460, 560-550, 550-1100, 1100-1190, 1190-2000, 2000-2090, 2090-2300, 2300-2390, 2390-3000, 3000-3090
-    //   cy     cy      ev       ev        ev       ev         ev         ev        ev          ev        ev        ev          ev
+    //   t1cy  t2cy    t3ev      t4ev    t5ev     t6ev       t7ev        t8ev       t9ev       t10ev     t11ev      t12ev      t13ev
     var hitbox = [hitboxLocation[0].x, hitboxLocation[0].y, hitboxLocation[0].s, hitboxLocation[0].s];
     var nextVideo = false;
     var doOneThanSkip = false;
