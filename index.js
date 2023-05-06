@@ -7,7 +7,7 @@ function hdlLoad() {
     var debugbtn = document.getElementById("debug");
     var monImg = document.getElementById("MoniImg");
     var ctx = canvas.getContext("2d");
-    var videoInt = 13;
+    var videoInt = 0;
     var video = document.getElementById("video");
     var sourceString = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4", "T7.mp4", "T8.mp4", "T9.mp4", "T10.mp4", "T11.mp4", "T12.mp4", "T13.mp4", "T14.mp4", "T15.mp4"];
     var hitboxLocation = [{ x: 660, y: 780, s: 100 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 }, { x: -100, y: -100, s: 100 }, { x: 820, y: 540, s: 200 },
