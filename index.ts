@@ -1,5 +1,5 @@
 window.addEventListener("load", hdlLoad);
-console.log("v1");
+console.log("v2");
 
 function hdlLoad(): void {
 localStorage.clear();
@@ -10,11 +10,12 @@ const monImg: HTMLImageElement = <HTMLImageElement>document.getElementById("Moni
 const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
 let videoInt: number = 0;
 let video: HTMLVideoElement  = <HTMLVideoElement>document.getElementById("video");
-let sourceString: string[] = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4", "T7.mp4", "T8.mp4", "T9.mp4", "T10.mp4", "T11.mp4"];
+let sourceString: string[] = ["T1.mp4", "T2.mp4", "T3.mp4", "T4.mp4", "T5.mp4", "T6.mp4", "T7.mp4", "T8.mp4", "T9.mp4", "T10.mp4", "T11.mp4", "T12.mp4", "T13.mp4"];
 let hitboxLocation: Vector[] = [{x: 660, y: 780, s: 100}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}, {x: -100, y: -100, s: 100}, {x: 820, y: 540, s: 200}, 
-                                {x: -100, y: -100, s: 100}, {x: 830, y: 40, s: 800}, {x: -100, y: -100, s: 100}, {x: 1080, y: 630, s: 260}, {x: -100, y: -100, s: 100}, {x: 0, y: 0, s: 2000}];
-//  1-90, 90-270, 272-362, 362-460, 560-550, 550-1100, 1100-1190, 1190-2000, 2000-2090, 2090-2300, 2300-2390,
-//   cy     cy      ev       ev        ev       ev         ev         ev        ev          ev        ev
+                                {x: -100, y: -100, s: 100}, {x: 830, y: 40, s: 800}, {x: -100, y: -100, s: 100}, {x: 1080, y: 630, s: 260}, {x: -100, y: -100, s: 100},
+                                {x: 0, y: 0, s: 2000}, {x: -100, y: -100, s: 100}, {x: 520, y: 530, s: 200}];
+//  1-90, 90-270, 272-362, 362-460, 560-550, 550-1100, 1100-1190, 1190-2000, 2000-2090, 2090-2300, 2300-2390, 2390-3000, 3000-3090
+//   cy     cy      ev       ev        ev       ev         ev         ev        ev          ev        ev        ev          ev
 let hitbox: number[] = [hitboxLocation[0].x, hitboxLocation[0].y, hitboxLocation[0].s, hitboxLocation[0].s];
 interface Vector {
     x: number;
@@ -26,7 +27,7 @@ let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
 let scaleFactor: number = 4.55;
 let debugMode: boolean = false;
-let interval;
+let interval: number;
 
 playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", monImg.src = "./Assets/MonitorBack.png";});
 debugbtn.addEventListener("click", toggleDebugMode);
@@ -80,7 +81,7 @@ video.addEventListener("play", function (): void {
             if(debugMode == true) {
             ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
             ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
-            }
+            }            
             interval = setInterval(loop, 1000 / 30);
         }
         else {
@@ -94,21 +95,24 @@ video.addEventListener("play", function (): void {
                 hitbox[3] = hitbox[2];
                 doOneThanSkip = false;
                 }
+            else {
+                console.log("finish");
+                if (nextVideo == true) {
+                videoInt ++;
+                video.src = "./Assets/" + sourceString[videoInt];
+                hitbox[0] = hitboxLocation[videoInt].x;
+                hitbox[1] = hitboxLocation[videoInt].y;
+                hitbox[2] = hitboxLocation[videoInt].s;
+                hitbox[3] = hitbox[2];
+                startVideo();
+                nextVideo = false;
+                doOneThanSkip = true;
+                }
+            }
             startVideo();
         }
     })();
-    console.log("finish");
-    if (nextVideo == true) {
-    videoInt ++;
-    video.src = "./Assets/" + sourceString[videoInt];
-    hitbox[0] = hitboxLocation[videoInt].x;
-    hitbox[1] = hitboxLocation[videoInt].y;
-    hitbox[2] = hitboxLocation[videoInt].s;
-    hitbox[3] = hitbox[2];
-    startVideo();
-    nextVideo = false;
-    doOneThanSkip = true;
-    }
+
 });
 
 function getCursorPosition(canvas: HTMLCanvasElement, event: MouseEvent): number[] {
