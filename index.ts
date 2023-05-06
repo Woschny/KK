@@ -1,4 +1,6 @@
 window.addEventListener("load", hdlLoad);
+console.log("v1");
+
 function hdlLoad(): void {
 localStorage.clear();
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas");
@@ -24,6 +26,7 @@ let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
 let scaleFactor: number = 4.55;
 let debugMode: boolean = false;
+let interval;
 
 playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", monImg.src = "./Assets/MonitorBack.png";});
 debugbtn.addEventListener("click", toggleDebugMode);
@@ -78,7 +81,7 @@ video.addEventListener("play", function (): void {
             ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
             ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
             }
-            setTimeout(loop, 1000 / 30); // drawing at 30fps
+            interval = setInterval(loop, 1000 / 30);
         }
         else {
             pauseVideo();

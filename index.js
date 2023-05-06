@@ -1,4 +1,5 @@
 window.addEventListener("load", hdlLoad);
+console.log("v1");
 function hdlLoad() {
     localStorage.clear();
     var canvas = document.getElementById("canvas");
@@ -18,6 +19,7 @@ function hdlLoad() {
     var doOneThanSkip = false;
     var scaleFactor = 4.55;
     var debugMode = false;
+    var interval;
     playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", monImg.src = "./Assets/MonitorBack.png"; });
     debugbtn.addEventListener("click", toggleDebugMode);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
@@ -64,7 +66,7 @@ function hdlLoad() {
                     ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
                     ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
                 }
-                setTimeout(loop, 1000 / 30); // drawing at 30fps
+                interval = setInterval(loop, 1000 / 30);
             }
             else {
                 pauseVideo();
