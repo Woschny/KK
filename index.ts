@@ -39,7 +39,6 @@ let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
 let scaleFactor: number = 6.75;
 let debugMode: boolean = false;
-let interval: number;
 
 let x: number;
 let y: number;
@@ -96,7 +95,7 @@ video.addEventListener("play", function (): void {
             ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
             ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
             }            
-            interval = setInterval(loop, 1000 / 30);
+            setTimeout(loop, 1000 / 24);
         }
         else {
             pauseVideo();

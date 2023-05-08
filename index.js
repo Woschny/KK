@@ -30,7 +30,6 @@ function hdlLoad() {
     var doOneThanSkip = false;
     var scaleFactor = 6.75;
     var debugMode = false;
-    var interval;
     var x;
     var y;
     playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", monImg.src = "./Assets/MonitorBack.png"; });
@@ -78,7 +77,7 @@ function hdlLoad() {
                     ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
                     ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
                 }
-                interval = setInterval(loop, 1000 / 30);
+                setTimeout(loop, 1000 / 24);
             }
             else {
                 pauseVideo();
