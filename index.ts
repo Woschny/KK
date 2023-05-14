@@ -6,7 +6,7 @@ localStorage.clear();
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas");
 const playbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("play");
 const debugbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("debug");
-const monImg: HTMLImageElement = <HTMLImageElement>document.getElementById("MoniImg");
+const TextImg: HTMLImageElement = <HTMLImageElement>document.getElementById("TextImg");
 const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
 let videoInt: number = 0;
 let video: HTMLVideoElement  = <HTMLVideoElement>document.getElementById("T1");
@@ -42,7 +42,7 @@ let debugMode: boolean = false;
 let x: number;
 let y: number;
 
-playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), monImg.src = "./Assets/MonitorBack.png";});
+playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen()});
 debugbtn.addEventListener("click", toggleDebugMode);
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
 canvas.addEventListener("mousemove", (e) => hoverVis(getCursorPosition(canvas, e)))
@@ -89,6 +89,9 @@ function LoopStart(): void {
     (function loop(): void {
         if (!$this.ended) {
             ctx.drawImage($this, 0, 0, canvas.width, canvas.height);
+            if(doOneThanSkip == true){
+                ctx.drawImage(TextImg, 0, 0, canvas.width, canvas.height);
+            }
             if(debugMode == true) {
             ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
             ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
@@ -101,6 +104,7 @@ function LoopStart(): void {
                 console.log(videoInt, sourceString.length);
                 if(videoInt < sourceString.length) {
                 video = <HTMLVideoElement>document.getElementById(sourceString[videoInt] + "");
+                TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
                 hitbox[0] = hitboxLocation[videoInt].x*screen.width/1280;
                 hitbox[1] = hitboxLocation[videoInt].y*screen.width/1280;
                 hitbox[2] = hitboxLocation[videoInt].s*screen.width/1280;
@@ -116,6 +120,7 @@ function LoopStart(): void {
                 console.log(videoInt, sourceString.length);
                 if(videoInt < sourceString.length) {
                 video = <HTMLVideoElement>document.getElementById(sourceString[videoInt] + "");
+                TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
                 hitbox[0] = hitboxLocation[videoInt].x*screen.width/1280;
                 hitbox[1] = hitboxLocation[videoInt].y*screen.width/1280;
                 hitbox[2] = hitboxLocation[videoInt].s*screen.width/1280;

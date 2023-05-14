@@ -1,11 +1,11 @@
 window.addEventListener("load", hdlLoad);
-console.log("v3");
+console.log("v4");
 function hdlLoad() {
     localStorage.clear();
     var canvas = document.getElementById("canvas");
     var playbtn = document.getElementById("play");
     var debugbtn = document.getElementById("debug");
-    var monImg = document.getElementById("MoniImg");
+    var TextImg = document.getElementById("TextImg");
     var ctx = canvas.getContext("2d");
     var videoInt = 0;
     var video = document.getElementById("T1");
@@ -31,7 +31,7 @@ function hdlLoad() {
     var debugMode = false;
     var x;
     var y;
-    playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), monImg.src = "./Assets/MonitorBack.png"; });
+    playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", showText(), document.documentElement.requestFullscreen(); });
     debugbtn.addEventListener("click", toggleDebugMode);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
@@ -67,11 +67,23 @@ function hdlLoad() {
         video.play();
         LoopStart();
     }
+    function showText() {
+        if (videoInt % 2 == 0) {
+            TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
+            }
+            else {
+            TextImg.src = "./Assets/T0.png";  
+            }
+    }
+
     function LoopStart() {
         var $this = video;
         (function loop() {
             if (!$this.ended) {
                 ctx.drawImage($this, 0, 0, canvas.width, canvas.height);
+                if (doOneThanSkip == true) {
+                    ctx.drawImage(TextImg, 0, 0, canvas.width, canvas.height);
+                }
                 if (debugMode == true) {
                     ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
                     ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
@@ -84,6 +96,7 @@ function hdlLoad() {
                     console.log(videoInt, sourceString.length);
                     if (videoInt < sourceString.length) {
                         video = document.getElementById(sourceString[videoInt] + "");
+                        showText();
                         hitbox[0] = hitboxLocation[videoInt].x * screen.width / 1280;
                         hitbox[1] = hitboxLocation[videoInt].y * screen.width / 1280;
                         hitbox[2] = hitboxLocation[videoInt].s * screen.width / 1280;
@@ -99,6 +112,7 @@ function hdlLoad() {
                         console.log(videoInt, sourceString.length);
                         if (videoInt < sourceString.length) {
                             video = document.getElementById(sourceString[videoInt] + "");
+                            showText();
                             hitbox[0] = hitboxLocation[videoInt].x * screen.width / 1280;
                             hitbox[1] = hitboxLocation[videoInt].y * screen.width / 1280;
                             hitbox[2] = hitboxLocation[videoInt].s * screen.width / 1280;
