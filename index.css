@@ -26,9 +26,8 @@ video{
 
 #TextImg{
     position: absolute;
-    top: -190px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -76%);
     pointer-events: none;
     z-index: 1;
 }
