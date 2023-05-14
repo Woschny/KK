@@ -4,9 +4,9 @@ body{
 }
 
 canvas{
-    background-color: #101010;
+    background-color: #db2424;
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     ;
@@ -27,7 +27,7 @@ video{
 
 .MoniImg{
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -35,7 +35,7 @@ video{
 }
 .Monitor{
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -43,23 +43,11 @@ video{
 
 .OverlayImg{
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 0;
-}
-#play{
-    position: absolute;
-    left: 400px;
-    top: 300px;
-    pointer-events: all;
-    padding: 1%;
-    opacity: 0;
-    z-index: 2;
-    border: red;
-    border-width: 20px;
-    border-style: solid;
 }
 #play:hover{
     cursor: pointer;

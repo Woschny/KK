@@ -28,7 +28,7 @@ let hitboxLocation: Vector[] = [{x: 420, y: 500, s: 100}, {x: -100, y: -100, s: 
 
 //  5490-5580, 5580-5670, 5670-6000, 6000-6090, 6090-6420, 6420-6510, 6510-6600, 6600-6690, 6690-7200, 7200-7290
 //    lp24ev    lp25ev      lp26ev    lp27ev     lp28ev    lp29ev     lp30ev     lp31ev    xlp32ev       lp33ev
-let hitbox: number[] = [hitboxLocation[0].x, hitboxLocation[0].y, hitboxLocation[0].s, hitboxLocation[0].s];
+let hitbox: number[] = [hitboxLocation[0].x*screen.width/1280, hitboxLocation[0].y*screen.width/1280, hitboxLocation[0].s*screen.width/1280, hitboxLocation[0].s*screen.width/1280];
 interface Vector {
     x: number;
     y: number;
@@ -37,26 +37,26 @@ interface Vector {
 
 let nextVideo: boolean = false;
 let doOneThanSkip: boolean = false;
-let scaleFactor: number = 6.75;
 let debugMode: boolean = false;
 
 let x: number;
 let y: number;
 
-playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", monImg.src = "./Assets/MonitorBack.png";});
+playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), monImg.src = "./Assets/MonitorBack.png";});
 debugbtn.addEventListener("click", toggleDebugMode);
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
 canvas.addEventListener("mousemove", (e) => hoverVis(getCursorPosition(canvas, e)))
+canvas.width = screen.width;
+canvas.height = screen.width/(1920/1080);
+document.getElementById("OverlayImg").style.width = canvas.width + "px";
 
-canvas.width = 1280;
-canvas.height = 720;
-canvas.style.width = canvas.width*(scaleFactor/10) + "px";
 
 function action(vector: number[]): void {
     console.log(vector);
     if (nextVideo == false && vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]){
         console.log("hit");
         nextVideo = true;
+        video.playbackRate = 5;
     }
 }
 
@@ -88,7 +88,7 @@ function LoopStart(): void {
     let $this: HTMLVideoElement = video;
     (function loop(): void {
         if (!$this.ended) {
-            ctx.drawImage($this, 0, 0);
+            ctx.drawImage($this, 0, 0, canvas.width, canvas.height);
             if(debugMode == true) {
             ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
             ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
@@ -101,9 +101,9 @@ function LoopStart(): void {
                 console.log(videoInt, sourceString.length);
                 if(videoInt < sourceString.length) {
                 video = <HTMLVideoElement>document.getElementById(sourceString[videoInt] + "");
-                hitbox[0] = hitboxLocation[videoInt].x;
-                hitbox[1] = hitboxLocation[videoInt].y;
-                hitbox[2] = hitboxLocation[videoInt].s;
+                hitbox[0] = hitboxLocation[videoInt].x*screen.width/1280;
+                hitbox[1] = hitboxLocation[videoInt].y*screen.width/1280;
+                hitbox[2] = hitboxLocation[videoInt].s*screen.width/1280;
                 hitbox[3] = hitbox[2];
                 }
                 hoverVis([x,y]);
@@ -116,9 +116,9 @@ function LoopStart(): void {
                 console.log(videoInt, sourceString.length);
                 if(videoInt < sourceString.length) {
                 video = <HTMLVideoElement>document.getElementById(sourceString[videoInt] + "");
-                hitbox[0] = hitboxLocation[videoInt].x;
-                hitbox[1] = hitboxLocation[videoInt].y;
-                hitbox[2] = hitboxLocation[videoInt].s;
+                hitbox[0] = hitboxLocation[videoInt].x*screen.width/1280;
+                hitbox[1] = hitboxLocation[videoInt].y*screen.width/1280;
+                hitbox[2] = hitboxLocation[videoInt].s*screen.width/1280;
                 hitbox[3] = hitbox[2];
                 }
                 hoverVis([x,y]);
@@ -134,8 +134,8 @@ function LoopStart(): void {
 
 function getCursorPosition(canvas: HTMLCanvasElement, event: MouseEvent): number[] {
     const rect: ClientRect = canvas.getBoundingClientRect();
-    x = (event.clientX - rect.left)*(10/scaleFactor);
-    y = (event.clientY - rect.top)*(10/scaleFactor);
+    x = (event.clientX - rect.left);
+    y = (event.clientY - rect.top);
     return[x, y];
 }
 
