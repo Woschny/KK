@@ -24,10 +24,9 @@ video{
     overflow: hidden;
 }
 
-
 #TextImg{
     position: absolute;
-    top: 50%;
+    top: -190px;
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
