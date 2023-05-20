@@ -1,5 +1,5 @@
 window.addEventListener("load", hdlLoad);
-console.log("v4");
+console.log("v3");
 function hdlLoad() {
     localStorage.clear();
     var canvas = document.getElementById("canvas");
@@ -31,7 +31,7 @@ function hdlLoad() {
     var debugMode = false;
     var x;
     var y;
-    playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", showText(), document.documentElement.requestFullscreen(); });
+    playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
     debugbtn.addEventListener("click", toggleDebugMode);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
@@ -56,10 +56,10 @@ function hdlLoad() {
     }
     function hoverVis(vector) {
         if (vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]) {
-            canvas.style.cursor = "pointer";
+            canvas.style.cursor = "url(./Assets/Grab.png) 50 50, auto";
         }
         else {
-            canvas.style.cursor = "default";
+            canvas.style.cursor = "url(./Assets/Fist.png) 50 50, auto";
         }
     }
     function startVideo() {
@@ -67,23 +67,11 @@ function hdlLoad() {
         video.play();
         LoopStart();
     }
-    function showText() {
-        if (videoInt % 2 == 0) {
-            TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
-            }
-            else {
-            TextImg.src = "./Assets/T0.png";  
-            }
-    }
-
     function LoopStart() {
         var $this = video;
         (function loop() {
             if (!$this.ended) {
                 ctx.drawImage($this, 0, 0, canvas.width, canvas.height);
-                if (doOneThanSkip == true) {
-                    ctx.drawImage(TextImg, 0, 0, canvas.width, canvas.height);
-                }
                 if (debugMode == true) {
                     ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
                     ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
@@ -96,7 +84,12 @@ function hdlLoad() {
                     console.log(videoInt, sourceString.length);
                     if (videoInt < sourceString.length) {
                         video = document.getElementById(sourceString[videoInt] + "");
-                        showText();
+                        if (videoInt % 2 == 0) {
+                            TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
+                        }
+                        else {
+                            TextImg.src = "./Assets/T0.png";
+                        }
                         hitbox[0] = hitboxLocation[videoInt].x * screen.width / 1280;
                         hitbox[1] = hitboxLocation[videoInt].y * screen.width / 1280;
                         hitbox[2] = hitboxLocation[videoInt].s * screen.width / 1280;
@@ -112,7 +105,12 @@ function hdlLoad() {
                         console.log(videoInt, sourceString.length);
                         if (videoInt < sourceString.length) {
                             video = document.getElementById(sourceString[videoInt] + "");
-                            showText();
+                            if (videoInt % 2 == 0) {
+                                TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
+                            }
+                            else {
+                                TextImg.src = "./Assets/T0.png";
+                            }
                             hitbox[0] = hitboxLocation[videoInt].x * screen.width / 1280;
                             hitbox[1] = hitboxLocation[videoInt].y * screen.width / 1280;
                             hitbox[2] = hitboxLocation[videoInt].s * screen.width / 1280;

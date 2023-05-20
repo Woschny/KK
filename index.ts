@@ -42,7 +42,7 @@ let debugMode: boolean = false;
 let x: number;
 let y: number;
 
-playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen()});
+playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
 debugbtn.addEventListener("click", toggleDebugMode);
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
 canvas.addEventListener("mousemove", (e) => hoverVis(getCursorPosition(canvas, e)))
@@ -71,10 +71,10 @@ function toggleDebugMode(): void {
 
 function hoverVis(vector: number[]): void {
     if (vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]){
-    canvas.style.cursor = "pointer";
+    canvas.style.cursor = "url(./Assets/Grab.png) 50 50, auto";
     }
     else {
-    canvas.style.cursor = "default";
+    canvas.style.cursor = "url(./Assets/Fist.png) 50 50, auto";
     }
 }
 
@@ -101,7 +101,12 @@ function LoopStart(): void {
                 console.log(videoInt, sourceString.length);
                 if(videoInt < sourceString.length) {
                 video = <HTMLVideoElement>document.getElementById(sourceString[videoInt] + "");
+                if(videoInt%2 == 0){
                 TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
+                }
+                else {
+                TextImg.src = "./Assets/T0.png"; 
+                }
                 hitbox[0] = hitboxLocation[videoInt].x*screen.width/1280;
                 hitbox[1] = hitboxLocation[videoInt].y*screen.width/1280;
                 hitbox[2] = hitboxLocation[videoInt].s*screen.width/1280;
@@ -117,7 +122,12 @@ function LoopStart(): void {
                 console.log(videoInt, sourceString.length);
                 if(videoInt < sourceString.length) {
                 video = <HTMLVideoElement>document.getElementById(sourceString[videoInt] + "");
-                TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
+                if(videoInt%2 == 0){
+                    TextImg.src = "./Assets/" + sourceString[videoInt] + ".png";
+                    }
+                    else {
+                    TextImg.src = "./Assets/T0.png"; 
+                    }
                 hitbox[0] = hitboxLocation[videoInt].x*screen.width/1280;
                 hitbox[1] = hitboxLocation[videoInt].y*screen.width/1280;
                 hitbox[2] = hitboxLocation[videoInt].s*screen.width/1280;

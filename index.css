@@ -48,5 +48,5 @@ video{
     z-index: 0;
 }
 #play:hover{
-    cursor: pointer;
+    cursor: url(./Assets/Grab.png) 50 50, auto;
 }
