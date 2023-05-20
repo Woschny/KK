@@ -7,6 +7,8 @@ const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("ca
 const playbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("play");
 const debugbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("debug");
 const TextImg: HTMLImageElement = <HTMLImageElement>document.getElementById("TextImg");
+const audioC: HTMLAudioElement = <HTMLAudioElement>document.getElementById("C");
+const audioG: HTMLAudioElement = <HTMLAudioElement>document.getElementById("G");
 const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
 let videoInt: number = 0;
 let video: HTMLVideoElement  = <HTMLVideoElement>document.getElementById("T1");
@@ -42,7 +44,7 @@ let debugMode: boolean = false;
 let x: number;
 let y: number;
 
-playbtn.addEventListener("click", () => {startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
+playbtn.addEventListener("click", () => {startVideo(), startAudio(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
 debugbtn.addEventListener("click", toggleDebugMode);
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
 canvas.addEventListener("mousemove", (e) => hoverVis(getCursorPosition(canvas, e)))
@@ -56,6 +58,7 @@ function action(vector: number[]): void {
     if (nextVideo == false && vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]){
         console.log("hit");
         nextVideo = true;
+        audioG.play();
         video.playbackRate = 5;
     }
 }
@@ -82,6 +85,11 @@ function startVideo(): void {
         console.log(video);
         video.play();
         LoopStart();         
+}
+
+function startAudio(): void {
+    audioC.volume = 0.2;
+    audioC.play();
 }
 
 function LoopStart(): void {

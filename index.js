@@ -6,6 +6,8 @@ function hdlLoad() {
     var playbtn = document.getElementById("play");
     var debugbtn = document.getElementById("debug");
     var TextImg = document.getElementById("TextImg");
+    var audioC = document.getElementById("C");
+    var audioG = document.getElementById("G");
     var ctx = canvas.getContext("2d");
     var videoInt = 0;
     var video = document.getElementById("T1");
@@ -31,7 +33,7 @@ function hdlLoad() {
     var debugMode = false;
     var x;
     var y;
-    playbtn.addEventListener("click", function () { startVideo(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
+    playbtn.addEventListener("click", function () { startVideo(), startAudio(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
     debugbtn.addEventListener("click", toggleDebugMode);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
@@ -43,6 +45,7 @@ function hdlLoad() {
         if (nextVideo == false && vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]) {
             console.log("hit");
             nextVideo = true;
+            audioG.play();
             video.playbackRate = 5;
         }
     }
@@ -66,6 +69,10 @@ function hdlLoad() {
         console.log(video);
         video.play();
         LoopStart();
+    }
+    function startAudio() {
+        audioC.volume = 0.2;
+        audioC.play();
     }
     function LoopStart() {
         var $this = video;
