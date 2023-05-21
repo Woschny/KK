@@ -79,6 +79,7 @@ function hdlLoad() {
         (function loop() {
             if (!$this.ended) {
                 ctx.drawImage($this, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(TextImg, 0, 0, canvas.width, canvas.height);
                 if (debugMode == true) {
                     ctx.fillStyle = "rgba(255, 0, 0, 0.3)";
                     ctx.fillRect(hitbox[0], hitbox[1], hitbox[2], hitbox[3]);
