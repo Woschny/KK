@@ -1,5 +1,5 @@
 window.addEventListener("load", hdlLoad);
-console.log("v3");
+console.log("v4");
 
 function hdlLoad(): void {
 localStorage.clear();
