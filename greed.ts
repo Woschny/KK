@@ -4,12 +4,14 @@ console.log("v5");
 function hdlLoad(): void {
 localStorage.clear();
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas");
-const playbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("play");
-const backbtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("back");
+const body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
+const playbtn: HTMLElement = <HTMLElement>document.getElementById("play");
+const backbtn: HTMLElement = <HTMLElement>document.getElementById("back");
 const TextImg: HTMLImageElement = <HTMLImageElement>document.getElementById("TextImg");
 const audioC: HTMLAudioElement = <HTMLAudioElement>document.getElementById("C");
 const audioG: HTMLAudioElement = <HTMLAudioElement>document.getElementById("G");
 const ctx: CanvasRenderingContext2D    = canvas.getContext("2d");
+let started: boolean = false;
 let videoInt: number = 0;
 let video: HTMLVideoElement  = <HTMLVideoElement>document.getElementById("T1");
 let sourceString: string[] = [  "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12",
@@ -44,13 +46,15 @@ let debugMode: boolean = false;
 let x: number;
 let y: number;
 
-playbtn.addEventListener("click", () => {startVideo(), startAudio(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
+playbtn.addEventListener("click", () => {startVideo(), startAudio(), playbtn.style.visibility = "hidden",started = true, document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
 backbtn.addEventListener("click", back);
 canvas.addEventListener("click", (e) => action(getCursorPosition(canvas, e)));
 canvas.addEventListener("mousemove", (e) => hoverVis(getCursorPosition(canvas, e)))
 canvas.width = screen.width;
 canvas.height = screen.width/(1920/1080);
 document.getElementById("OverlayImg").style.width = canvas.width + "px";
+playbtn.addEventListener("mouseover", () => playbtn.style.cursor = "url(./Assets/Grab.png) 50 50, auto");
+backbtn.addEventListener("mouseover", () => backbtn.style.cursor = "url(./Assets/Grab.png) 50 50, auto");
 
 
 function back(): void {
@@ -79,9 +83,11 @@ function toggleDebugMode(): void {
 function hoverVis(vector: number[]): void {
     if (vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]){
     canvas.style.cursor = "url(./Assets/Grab.png) 50 50, auto";
+    body.style.cursor = "url(./Assets/Grab.png) 50 50, auto";
     }
     else {
     canvas.style.cursor = "url(./Assets/Fist.png) 50 50, auto";
+    body.style.cursor = "url(./Assets/Fist.png) 50 50, auto";
     }
 }
 

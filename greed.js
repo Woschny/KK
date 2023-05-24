@@ -3,12 +3,14 @@ console.log("v5");
 function hdlLoad() {
     localStorage.clear();
     var canvas = document.getElementById("canvas");
+    var body = document.querySelector("body");
     var playbtn = document.getElementById("play");
     var backbtn = document.getElementById("back");
     var TextImg = document.getElementById("TextImg");
     var audioC = document.getElementById("C");
     var audioG = document.getElementById("G");
     var ctx = canvas.getContext("2d");
+    var started = false;
     var videoInt = 0;
     var video = document.getElementById("T1");
     var sourceString = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12",
@@ -33,13 +35,15 @@ function hdlLoad() {
     var debugMode = false;
     var x;
     var y;
-    playbtn.addEventListener("click", function () { startVideo(), startAudio(), playbtn.style.visibility = "hidden", document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
+    playbtn.addEventListener("click", function () { startVideo(), startAudio(), playbtn.style.visibility = "hidden", started = true, document.documentElement.requestFullscreen(), TextImg.src = "./Assets/T1.png"; });
     backbtn.addEventListener("click", back);
     canvas.addEventListener("click", function (e) { return action(getCursorPosition(canvas, e)); });
     canvas.addEventListener("mousemove", function (e) { return hoverVis(getCursorPosition(canvas, e)); });
     canvas.width = screen.width;
     canvas.height = screen.width / (1920 / 1080);
     document.getElementById("OverlayImg").style.width = canvas.width + "px";
+    playbtn.addEventListener("mouseover", function () { return playbtn.style.cursor = "url(./Assets/Grab.png) 50 50, auto"; });
+    backbtn.addEventListener("mouseover", function () { return backbtn.style.cursor = "url(./Assets/Grab.png) 50 50, auto"; });
     function back() {
         window.open("./main.html", "_self");
     }
@@ -63,9 +67,11 @@ function hdlLoad() {
     function hoverVis(vector) {
         if (vector[0] >= hitbox[0] && vector[0] <= hitbox[0] + hitbox[2] && vector[1] >= hitbox[1] && vector[1] <= hitbox[1] + hitbox[3]) {
             canvas.style.cursor = "url(./Assets/Grab.png) 50 50, auto";
+            body.style.cursor = "url(./Assets/Grab.png) 50 50, auto";
         }
         else {
             canvas.style.cursor = "url(./Assets/Fist.png) 50 50, auto";
+            body.style.cursor = "url(./Assets/Fist.png) 50 50, auto";
         }
     }
     function startVideo() {

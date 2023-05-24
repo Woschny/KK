@@ -1,6 +1,13 @@
 body{
     background-color: #262626;
     overflow: hidden;
+    user-select: none;
+    width: 100vw;
+    height: 100vh;
+    cursor: url(./Assets/Fist.png) 50 50, auto;
+    font-family: monospace;
+    font-size:x-large;
+    line-height: 150%;
 }
 
 canvas{
@@ -9,11 +16,26 @@ canvas{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    ;
 }
 
-button{
+h4{
     position: absolute;
+    background-color: #262626;
+    border: none;
+    color: #ff9525;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+#play :hover{
+    color: #fff0c8;
+    cursor: url(./Assets/Grab.png) 50 50, auto;
+}
+#back :hover{
+    color: #fff0c8;
+    cursor: url(./Assets/Grab.png) 50 50, auto;
 }
 
 video{
@@ -45,7 +67,4 @@ video{
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 0;
-}
-#play:hover{
-    cursor: url(./Assets/Grab.png) 50 50, auto;
 }
