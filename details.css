@@ -223,3 +223,10 @@ p{
     grid-row-start: 4;
     grid-row-end: 4;
 }
+#QRCODE{
+    width: 200px;
+    position: absolute;
+    left: 950px;
+    top: 700px;
+    z-index: 5;
+}
